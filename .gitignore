@@ -1,2 +1,6 @@
 /UnityStuff/Library/
-/UnityStuff/Temp/UnityLockfile
+/UnityStuff/Temp/
+/UnityStuff/Assets/Sprites/skybox.psd
+/UnityStuff/.vs
+/builds/
+/ignore/

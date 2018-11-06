@@ -40,7 +40,8 @@ namespace dha8 {
         void Update() {
             if(showingTutorial != Singleton.instance.tutorialShow) {
                 showingTutorial = Singleton.instance.tutorialShow;
-                tutorialPanel.gameObject.SetActive(showingTutorial);
+                tutorialPanel.gameObject.SetActive(!Singleton.keepOnLoad.tutorialPanelShown);
+                Singleton.keepOnLoad.tutorialPanelShown = true;
             }
             //if(Time.time-lastUpdate < .25f) {
             //          lastUpdate = Time.time;

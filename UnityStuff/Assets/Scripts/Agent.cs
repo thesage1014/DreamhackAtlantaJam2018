@@ -48,6 +48,7 @@ namespace dha8 {
         }
         void Update() {
             if (health <= 0 && alive) {
+                // TODO tie breaker
                 Die();
             }
             GetComponentInChildren<MeshRenderer>().material.color = color;
@@ -123,7 +124,6 @@ namespace dha8 {
                     TargetNearestNode();
                     moveMode = MoveMode.random;
                 }
-
             } else {
                 if (targetNode != null) {
                     if (movedLately < 2) {
@@ -147,7 +147,11 @@ namespace dha8 {
                         if ((here - there).magnitude < distanceForChange) { // Arrived, Change node destination
                             movedLately2 = 50000;
                             if (moveMode == MoveMode.random) {
-                                targetNode = targetNode.friends[Random.Range(0, targetNode.friends.Count)];
+                                if(Random.value < .5f) {
+                                    targetNode = targetNode.friends[Random.Range(0, targetNode.friends.Count)];
+                                } else {
+                                    targetNode = targetNode.cw;
+                                }
                             }
                             if (moveMode == MoveMode.cw) {
                                 targetNode = targetNode.cw;
@@ -181,6 +185,7 @@ namespace dha8 {
                     pounceCounter += 1;// Random.Range(0, 5);
                     if (pounceCounter % 80 == 0) {
                         rbody.AddForce((there - here).normalized * 70000 * Time.fixedDeltaTime - rbody.velocity);
+                        Singleton.instance.PlaySound(Singleton.instance.gruntSound);
                     }
                     if (pounceCounter % 40 == 0) {
                         rbody.AddForce((there - here).normalized * -10000 * Time.fixedDeltaTime - rbody.velocity);
@@ -217,8 +222,6 @@ namespace dha8 {
                 numAcorns--;
                 var acorns = GetComponentsInChildren<PlayerAcorn>();
                 Destroy(acorns[acorns.Length - 1].gameObject);
-            } else {
-                print("lost nonexisting acorn");
             }
             if(numAcorns == 0) {
                 GetComponentInChildren<BoxCollider>().enabled = false;

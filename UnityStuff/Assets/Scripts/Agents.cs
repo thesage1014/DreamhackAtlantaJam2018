@@ -23,12 +23,14 @@ namespace dha8 {
 	    void Update () {
             if(Singleton.instance.started) {
 
-		        if(agents.Count == 1) {
+                if (agents.Count == 1) {
                     Singleton.instance.Winner(agents[0]);
+                } else if (agents.Count == 0) {
+                    Singleton.instance.Winner(FindObjectOfType<Agent>());
                 } else {
 
-                    foreach(Agent ag in agents) {
-                        if(ag.alive && ag.panel.betAmount != 0) {
+                    foreach (Agent ag in agents) {
+                        if (ag.alive && ag.panel.betAmount != 0) {
                             return;
                         }
                     }

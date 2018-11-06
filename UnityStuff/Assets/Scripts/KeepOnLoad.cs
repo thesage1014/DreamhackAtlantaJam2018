@@ -4,6 +4,7 @@ namespace dha8 {
 
     public class KeepOnLoad : MonoBehaviour {
         public int Apples = 5;
+        public bool tutorialPanelShown;
         // Use this for initialization
         void Awake() {
             if (FindObjectsOfType<KeepOnLoad>().Length > 1) {

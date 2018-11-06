@@ -8,7 +8,7 @@ namespace dha8 {
     public class Singleton : MonoBehaviour {
         public static Singleton instance;
         public static bool ShowNodes = false, showHelpers = false;
-        public AudioClip nutSound, attackSound, leavesSound, speedSound, strengthSound, healthSound;
+        public AudioClip nutSound, attackSound, leavesSound, speedSound, strengthSound, healthSound, gruntSound;
         public Node centerNode, altarNode;
         public NodeManager nodeManager;
         public GameObject acornPrefab;
